@@ -1,0 +1,38 @@
+{
+  "welcomeFile": "interaction_items/webapp/index.html",
+  "authenticationMethod": "route",
+  "logout": {
+    "logoutEndpoint": "/app-logout",
+    "logoutPage": "/"
+  },
+  "routes": [
+    {
+      "source": "^/interaction_items/webapp/(.*)$",
+      "target": "$1",
+      "localDir": "interaction_items/webapp/",
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/(.*)$",
+      "destination": "srv-api",
+      "csrfProtection": true,
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/debug$",
+      "target": "/",
+      "destination": "srv-api",
+      "csrfProtection": true
+    },
+    {
+      "source": "^/appconfig/",
+      "localDir": ".",
+      "cacheControl": "no-cache, no-store, must-revalidate"
+    },
+    {
+      "source": "^/user-api(.*)",
+      "target": "$1",
+      "service": "sap-approuter-userapi"
+    }
+  ]
+}
